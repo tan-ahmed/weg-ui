@@ -1,0 +1,16 @@
+/* Button component styles */
+.button__icon {
+  @apply flex items-center justify-center shrink-0;
+}
+
+.button__icon--left {
+  @apply mr-2;
+}
+
+.button__icon--right {
+  @apply ml-2;
+}
+
+.button__text {
+  @apply flex flex-col justify-center leading-none;
+}
