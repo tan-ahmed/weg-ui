@@ -25,7 +25,7 @@ function AccordionPage() {
 
 export function AccordionDemo() {
   return (
-    <Accordion type="single" collapsible size="md">
+    <Accordion collapsible size="md">
       <AccordionItem value="item-1">
         <AccordionTrigger>
           What is the Warwick Design System?
@@ -90,7 +90,7 @@ export function AccordionDemo() {
       <div className="mb-8">
         {activeTab === "preview" ? (
           <div className="p-8 bg-gray-50 rounded-lg border">
-            <Accordion type="single" collapsible size="md">
+            <Accordion collapsible size="md">
               <AccordionItem value="item-1">
                 <AccordionTrigger>
                   What is the Warwick Design System?
@@ -156,7 +156,7 @@ export function AccordionDemo() {
           <div className="p-8 bg-gray-50 rounded-lg border space-y-6">
             <div>
               <p className="text-sm font-medium text-gray-700 mb-2">Small</p>
-              <Accordion type="single" collapsible size="sm">
+              <Accordion collapsible size="sm">
                 <AccordionItem value="item-1">
                   <AccordionTrigger>Small Accordion</AccordionTrigger>
                   <AccordionContent>
@@ -169,7 +169,7 @@ export function AccordionDemo() {
               <p className="text-sm font-medium text-gray-700 mb-2">
                 Medium (Default)
               </p>
-              <Accordion type="single" collapsible size="md">
+              <Accordion collapsible size="md">
                 <AccordionItem value="item-1">
                   <AccordionTrigger>Medium Accordion</AccordionTrigger>
                   <AccordionContent>
@@ -180,7 +180,7 @@ export function AccordionDemo() {
             </div>
             <div>
               <p className="text-sm font-medium text-gray-700 mb-2">Large</p>
-              <Accordion type="single" collapsible size="lg">
+              <Accordion collapsible size="lg">
                 <AccordionItem value="item-1">
                   <AccordionTrigger>Large Accordion</AccordionTrigger>
                   <AccordionContent>

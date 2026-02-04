@@ -5,14 +5,25 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { accordionVariants } from "./accordion.variants";
 
+export type AccordionProps = Omit<
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>,
+  "type"
+> &
+  VariantProps<typeof accordionVariants> & {
+    /** When true, multiple sections can be open at once. When false, only one section is open at a time. */
+    isMultipleOpen?: boolean;
+    /** When true, the open section can be closed by clicking again. Only applies when isMultipleOpen is false. */
+    collapsible?: boolean;
+  };
+
 const Accordion = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root> &
-    VariantProps<typeof accordionVariants>
->(({ className, size, ...props }, ref) => (
+  AccordionProps
+>(({ className, size, fullWidth, isMultipleOpen, type: _type, ...props }, ref) => (
   <AccordionPrimitive.Root
     ref={ref}
-    className={cn(accordionVariants({ size }), className)}
+    type={isMultipleOpen ? "multiple" : "single"}
+    className={cn(accordionVariants({ size, fullWidth }), className)}
     {...props}
   />
 ));

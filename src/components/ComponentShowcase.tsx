@@ -210,7 +210,7 @@ export function AlertDemo() {
 
 export function AccordionDemo() {
   return (
-    <Accordion type="single" collapsible size="md">
+    <Accordion collapsible size="md">
       <AccordionItem value="item-1">
         <AccordionTrigger>
           What is the Warwick Design System?
@@ -223,7 +223,7 @@ export function AccordionDemo() {
   )
 }`,
       preview: (
-        <Accordion type="single" collapsible size="md">
+        <Accordion collapsible size="md">
           <AccordionItem value="item-1">
             <AccordionTrigger>
               What is the Warwick Design System?

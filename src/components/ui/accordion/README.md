@@ -42,7 +42,7 @@ import {
 ### Basic Accordion
 
 ```tsx
-<Accordion type="single" collapsible>
+<Accordion collapsible>
   <AccordionItem value="item-1">
     <AccordionTrigger>Section 1</AccordionTrigger>
     <AccordionContent>Content for section 1 goes here.</AccordionContent>
@@ -58,17 +58,17 @@ import {
 
 ```tsx
 // Small (16px padding, smaller text)
-<Accordion type="single" collapsible size="sm">
+<Accordion collapsible size="sm">
   {/* items */}
 </Accordion>
 
 // Medium (32px padding - default)
-<Accordion type="single" collapsible size="md">
+<Accordion collapsible size="md">
   {/* items */}
 </Accordion>
 
 // Large (28px padding)
-<Accordion type="single" collapsible size="lg">
+<Accordion collapsible size="lg">
   {/* items */}
 </Accordion>
 ```
@@ -76,7 +76,7 @@ import {
 ### Multiple Items Open
 
 ```tsx
-<Accordion type="multiple">
+<Accordion isMultipleOpen>
   <AccordionItem value="item-1">
     <AccordionTrigger>Section 1</AccordionTrigger>
     <AccordionContent>Content 1</AccordionContent>
@@ -88,10 +88,10 @@ import {
 </Accordion>
 ```
 
-### Full Width with Text Constraints
+### Full Width
 
 ```tsx
-<Accordion type="single" collapsible size="lg" style={{ maxWidth: "1280px" }}>
+<Accordion collapsible size="lg" fullWidth>
   <AccordionItem value="item-1">
     <AccordionTrigger>Section 1</AccordionTrigger>
     <AccordionContent>
@@ -106,7 +106,7 @@ import {
 ### Default Open Item
 
 ```tsx
-<Accordion type="single" collapsible defaultValue="item-1">
+<Accordion collapsible defaultValue="item-1">
   <AccordionItem value="item-1">
     <AccordionTrigger>This Section Opens by Default</AccordionTrigger>
     <AccordionContent>Content here</AccordionContent>
@@ -118,14 +118,15 @@ import {
 
 ### Accordion
 
-| Prop            | Type                     | Default | Description                                |
-| --------------- | ------------------------ | ------- | ------------------------------------------ |
-| `type`          | `'single' \| 'multiple'` | -       | Whether one or multiple items can be open  |
-| `size`          | `'sm' \| 'md' \| 'lg'`   | `'md'`  | Size variant                               |
-| `collapsible`   | `boolean`                | -       | Can items be collapsed (for type='single') |
-| `defaultValue`  | `string \| string[]`     | -       | Default open item(s)                       |
-| `value`         | `string \| string[]`     | -       | Controlled open item(s)                    |
-| `onValueChange` | `function`               | -       | Callback when value changes                |
+| Prop              | Type                     | Default  | Description                                                                 |
+| ----------------- | ------------------------ | -------- | --------------------------------------------------------------------------- |
+| `isMultipleOpen`  | `boolean`                | `false`  | When true, multiple sections can be open at once                             |
+| `fullWidth`       | `boolean`                | `false`  | When true, the accordion stretches to full width of its container            |
+| `size`            | `'sm' \| 'md' \| 'lg'`   | `'md'`   | Size variant                                                                |
+| `collapsible`     | `boolean`                | -        | Can the open section be closed by clicking again (only when single mode)    |
+| `defaultValue`    | `string \| string[]`     | -        | Default open item(s)                                                        |
+| `value`           | `string \| string[]`     | -        | Controlled open item(s)                                                     |
+| `onValueChange`   | `function`               | -        | Callback when value changes                                                 |
 
 ### AccordionItem
 

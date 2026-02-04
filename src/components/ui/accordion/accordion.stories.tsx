@@ -4,6 +4,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  type AccordionProps,
 } from "./accordion";
 
 const meta = {
@@ -19,32 +20,36 @@ const meta = {
       options: ["sm", "md", "lg"],
       description: "Choose the size of the accordion sections",
     },
-    type: {
-      control: "select",
-      options: ["single", "multiple"],
+    isMultipleOpen: {
+      control: "boolean",
       description:
-        "Allow one section open at a time, or multiple sections open together",
+        "When true, multiple sections can be open at once. When false, only one section is open at a time.",
     },
     collapsible: {
       control: "boolean",
       description:
-        "Allow users to close an open section by clicking it again (only applies to type='single')",
+        "Allow users to close an open section by clicking it again (only applies when isMultipleOpen is false)",
+    },
+    fullWidth: {
+      control: "boolean",
+      description: "When true, the accordion stretches to full width of its container.",
     },
   },
-} satisfies Meta<typeof Accordion>;
+} satisfies Meta<AccordionProps>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<AccordionProps>;
 
 // Interactive Playground
 export const Playground: Story = {
   args: {
-    type: "single",
+    isMultipleOpen: false,
     collapsible: true,
     size: "md",
+    fullWidth: false,
   },
   render: (args) => (
-    <Accordion {...args} style={{ maxWidth: "680px" }}>
+    <Accordion {...args} style={args.fullWidth ? undefined : { maxWidth: "680px" }}>
       <AccordionItem value="item-1">
         <AccordionTrigger>Section 1</AccordionTrigger>
         <AccordionContent>
@@ -58,8 +63,17 @@ export const Playground: Story = {
         <AccordionTrigger>Section 2</AccordionTrigger>
         <AccordionContent>
           <p>
-            This is the content for section 2. Try changing the type to
-            "multiple" to open both sections at once.
+            This is the content for section 2. Turn on isMultipleOpen to open
+            multiple sections at once.
+          </p>
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Section 3</AccordionTrigger>
+        <AccordionContent>
+          <p>
+            This is the content for section 3. Try fullWidth to stretch the
+            accordion.
           </p>
         </AccordionContent>
       </AccordionItem>
@@ -70,7 +84,7 @@ export const Playground: Story = {
 // All Sizes - Show all accordion sizes together
 export const Sizes: Story = {
   args: {
-    type: "single",
+    isMultipleOpen: false,
     collapsible: true,
     size: "md",
   },
@@ -79,7 +93,7 @@ export const Sizes: Story = {
       <div className="flex flex-col gap-4">
         <h3 className="text-lg font-semibold">Small Size</h3>
         <Accordion
-          type="single"
+          isMultipleOpen={false}
           collapsible
           size="sm"
           style={{ maxWidth: "343px" }}
@@ -96,13 +110,19 @@ export const Sizes: Story = {
               <p>Content for section 2 in small size.</p>
             </AccordionContent>
           </AccordionItem>
+          <AccordionItem value="item-3">
+            <AccordionTrigger>Section 3</AccordionTrigger>
+            <AccordionContent>
+              <p>Content for section 3 in small size.</p>
+            </AccordionContent>
+          </AccordionItem>
         </Accordion>
       </div>
 
       <div className="flex flex-col gap-4">
         <h3 className="text-lg font-semibold">Medium Size</h3>
         <Accordion
-          type="single"
+          isMultipleOpen={false}
           collapsible
           size="md"
           style={{ maxWidth: "680px" }}
@@ -119,13 +139,19 @@ export const Sizes: Story = {
               <p>Content for section 2 in medium size.</p>
             </AccordionContent>
           </AccordionItem>
+          <AccordionItem value="item-3">
+            <AccordionTrigger>Section 3</AccordionTrigger>
+            <AccordionContent>
+              <p>Content for section 3 in medium size.</p>
+            </AccordionContent>
+          </AccordionItem>
         </Accordion>
       </div>
 
       <div className="flex flex-col gap-4">
         <h3 className="text-lg font-semibold">Large Size</h3>
         <Accordion
-          type="single"
+          isMultipleOpen={false}
           collapsible
           size="lg"
           style={{ maxWidth: "680px" }}
@@ -142,6 +168,12 @@ export const Sizes: Story = {
               <p>Content for section 2 in large size.</p>
             </AccordionContent>
           </AccordionItem>
+          <AccordionItem value="item-3">
+            <AccordionTrigger>Section 3</AccordionTrigger>
+            <AccordionContent>
+              <p>Content for section 3 in large size.</p>
+            </AccordionContent>
+          </AccordionItem>
         </Accordion>
       </div>
     </div>
@@ -151,24 +183,26 @@ export const Sizes: Story = {
 // Multiple Items Open
 export const MultipleOpen: Story = {
   args: {
-    type: "multiple",
+    isMultipleOpen: true,
     size: "md",
+    fullWidth: false,
   },
   render: (args) => (
-    <Accordion {...args} style={{ maxWidth: "680px" }}>
+    <Accordion {...args} style={args.fullWidth ? undefined : { maxWidth: "680px" }}>
       <AccordionItem value="item-1">
         <AccordionTrigger>Section 1</AccordionTrigger>
         <AccordionContent>
           <p>
-            With type="multiple", multiple sections can be open at the same
-            time. Note: collapsible behavior is not available for multiple type.
+            With isMultipleOpen, multiple sections can be open at the same time.
+            Note: collapsible behavior is not available when multiple sections
+            can be open.
           </p>
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
         <AccordionTrigger>Section 2</AccordionTrigger>
         <AccordionContent>
-          <p>Try opening both sections simultaneously.</p>
+          <p>Try opening multiple sections simultaneously.</p>
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-3">
@@ -184,12 +218,13 @@ export const MultipleOpen: Story = {
 // Single Item
 export const SingleItem: Story = {
   args: {
-    type: "single",
+    isMultipleOpen: false,
     collapsible: true,
     size: "md",
+    fullWidth: false,
   },
   render: (args) => (
-    <Accordion {...args} style={{ maxWidth: "680px" }}>
+    <Accordion {...args} style={args.fullWidth ? undefined : { maxWidth: "680px" }}>
       <AccordionItem value="item-1">
         <AccordionTrigger>Single Section</AccordionTrigger>
         <AccordionContent>

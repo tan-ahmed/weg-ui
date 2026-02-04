@@ -7,8 +7,13 @@ export const accordionVariants = cva("bg-[#e6e7e7] rounded-xl", {
       md: "px-6 py-4 text-lg",
       lg: "px-12 py-8 text-lg",
     },
+    fullWidth: {
+      true: "w-full",
+      false: "",
+    },
   },
   defaultVariants: {
     size: "md",
+    fullWidth: false,
   },
 });
