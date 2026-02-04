@@ -40,45 +40,95 @@ const meta = {
 export default meta;
 type Story = StoryObj<AccordionProps>;
 
+// Editable text args for Playground only
+type PlaygroundArgs = AccordionProps & {
+  section1Title?: string;
+  section1Content?: string;
+  section2Title?: string;
+  section2Content?: string;
+  section3Title?: string;
+  section3Content?: string;
+};
+
 // Interactive Playground
-export const Playground: Story = {
+export const Playground: StoryObj<PlaygroundArgs> = {
   args: {
     isMultipleOpen: false,
     collapsible: true,
     size: "md",
     fullWidth: false,
+    section1Title: "Section 1",
+    section1Content:
+      "This is the content for section 1. You can customize the accordion properties using the controls.",
+    section2Title: "Section 2",
+    section2Content:
+      "This is the content for section 2. Turn on isMultipleOpen to open multiple sections at once.",
+    section3Title: "Section 3",
+    section3Content:
+      "This is the content for section 3. Try fullWidth to stretch the accordion.",
   },
-  render: (args) => (
-    <Accordion {...args} style={args.fullWidth ? undefined : { maxWidth: "680px" }}>
-      <AccordionItem value="item-1">
-        <AccordionTrigger>Section 1</AccordionTrigger>
-        <AccordionContent>
-          <p>
-            This is the content for section 1. You can customize the accordion
-            properties using the controls.
-          </p>
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionTrigger>Section 2</AccordionTrigger>
-        <AccordionContent>
-          <p>
-            This is the content for section 2. Turn on isMultipleOpen to open
-            multiple sections at once.
-          </p>
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-3">
-        <AccordionTrigger>Section 3</AccordionTrigger>
-        <AccordionContent>
-          <p>
-            This is the content for section 3. Try fullWidth to stretch the
-            accordion.
-          </p>
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
-  ),
+  argTypes: {
+    section1Title: {
+      control: "text",
+      description: "Heading for the first section",
+    },
+    section1Content: {
+      control: "text",
+      description: "Content for the first section",
+    },
+    section2Title: {
+      control: "text",
+      description: "Heading for the second section",
+    },
+    section2Content: {
+      control: "text",
+      description: "Content for the second section",
+    },
+    section3Title: {
+      control: "text",
+      description: "Heading for the third section",
+    },
+    section3Content: {
+      control: "text",
+      description: "Content for the third section",
+    },
+  },
+  render: (args) => {
+    const {
+      section1Title,
+      section1Content,
+      section2Title,
+      section2Content,
+      section3Title,
+      section3Content,
+      ...accordionArgs
+    } = args;
+    return (
+      <Accordion
+        {...accordionArgs}
+        style={accordionArgs.fullWidth ? undefined : { maxWidth: "680px" }}
+      >
+        <AccordionItem value="item-1">
+          <AccordionTrigger>{section1Title}</AccordionTrigger>
+          <AccordionContent>
+            <p>{section1Content}</p>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-2">
+          <AccordionTrigger>{section2Title}</AccordionTrigger>
+          <AccordionContent>
+            <p>{section2Content}</p>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-3">
+          <AccordionTrigger>{section3Title}</AccordionTrigger>
+          <AccordionContent>
+            <p>{section3Content}</p>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    );
+  },
 };
 
 // All Sizes - Show all accordion sizes together
