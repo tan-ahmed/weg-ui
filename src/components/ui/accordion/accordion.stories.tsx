@@ -34,6 +34,18 @@ const meta = {
       control: "boolean",
       description: "When true, the accordion stretches to full width of its container.",
     },
+    backgroundColor: {
+      control: "color",
+      description: "Background colour of the accordion container. CMS/theming-friendly.",
+    },
+    dividerColor: {
+      control: "color",
+      description: "Colour of the divider between accordion items. CMS/theming-friendly.",
+    },
+    textColor: {
+      control: "color",
+      description: "Text colour for trigger headings and content. CMS/theming-friendly.",
+    },
   },
 } satisfies Meta<AccordionProps>;
 
@@ -57,6 +69,9 @@ export const Playground: StoryObj<PlaygroundArgs> = {
     collapsible: true,
     size: "md",
     fullWidth: false,
+    backgroundColor: "#e6e7e7",
+    dividerColor: "#9ca3af",
+    textColor: "#000000",
     section1Title: "Section 1",
     section1Content:
       "This is the content for section 1. You can customize the accordion properties using the controls.",
@@ -106,7 +121,10 @@ export const Playground: StoryObj<PlaygroundArgs> = {
     return (
       <Accordion
         {...accordionArgs}
-        style={accordionArgs.fullWidth ? undefined : { maxWidth: "680px" }}
+        style={{
+          ...(accordionArgs.fullWidth ? undefined : { maxWidth: "680px" }),
+          ...accordionArgs.style,
+        }}
       >
         <AccordionItem value="item-1">
           <AccordionTrigger>{section1Title}</AccordionTrigger>
